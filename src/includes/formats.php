@@ -1280,7 +1280,8 @@ $formats = [
 		'Número de distrito' => [
 			'start' => 17,
 			'length' => 2,
-			'formatter' => fn($code) => $code === '01' ? null : $code,
+			// alexandregz: discrepo de devolver null nestes casos, de feito existe distrito (ainda que seja unico), comento. Como em Mesa "U" (única)
+			'formatter' => fn($code) => (int) $code //$code === '01' ? null : $code,
 		],
 
 		// Código de la sección (tres dígitos seguidos de un espacio, letra mayúscula u otro dígito)
@@ -1294,7 +1295,8 @@ $formats = [
 		'Código de mesa' => [
 			'start' => 23,
 			'length' => 1,
-			'formatter' => fn($code) => $code === 'U' ? null : $code,
+			// alexandregz: devolvo ainda que seja 'U', eu entendo que tem que haber mesa.
+			'formatter' => fn($code) => $code // === 'U' ? null : $code,
 		],
 
 		// Censo del INE
@@ -1472,7 +1474,7 @@ $formats = [
 		'Número de distrito' => [
 			'start' => 17,
 			'length' => 2,
-			'formatter' => fn($code) => $code === '01' ? null : $code,
+			'formatter' => fn($code) => $code //=== '01' ? null : $code,
 		],
 
 		// Código de la sección (tres dígitos seguidos de un espacio, letra mayúscula u otro dígito)
@@ -1486,7 +1488,7 @@ $formats = [
 		'Código de mesa' => [
 			'start' => 23,
 			'length' => 1,
-			'formatter' => fn($code) => $code === 'U' ? null : $code,
+			'formatter' => fn($code) => $code //=== 'U' ? null : $code,
 		],
 
 		// Código de la candidatura o del senador

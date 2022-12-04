@@ -31,11 +31,13 @@ require 'formats.php';
 /**
  * Decodifica una línea de un fichero, dado su tipo.
  *
- * @param  string $format Tipo de fichero. Véase la constante `FICHEROS`
- * @param  string $line   Línea de texto a decodificar
- * @return array          Estructura de datos con la línea decodificada
+ * @param  string $format 	Tipo de fichero. Véase la constante `FICHEROS`
+ * @param  string $line   	Línea de texto a decodificar
+ * @param  string $raw    	Devolve o dato em bruto (necesario para buscar por CA e para devolver CODIGOINE ou similar)
+ * @param  array  $only		Se nom garda resultados dos indicados [key => valor, key2 => valor2, ...]
+ * @return array          	Estructura de datos con la línea decodificada
  */
-function parseLine($format, $line) {
+function parseLine($format, $line, $raw=false, $only=[]) {
 	global $formats;
 
 	// Ficheros como `municipales/04201505_TOTA/04041505.DAT` tienen corrompido
@@ -62,7 +64,14 @@ function parseLine($format, $line) {
 		$value = substr($line, $field['start'] - 1, $field['length']);
 		$result = $field['formatter']($value, $line);
 		if (!is_null($result)) {
+			foreach($only as $k => $v) {
+				// se nom temos que gardalo, saimos da function porque a linha enteira sobra,
+				// nom abonda cum "continue 2" porque simplemente pasa da key indicada pero garda o resto
+				if($name == $k && $result != $v) { return null; }
+			}
+			
 			$results[$name] = $result;
+			if($raw) $results[$name."_raw"] = $value;
 		}
 	}
 
@@ -101,17 +110,22 @@ function parseName($filename) {
 /**
  * Interpreta un fichero `.DAT` conforme la especificación.
  *
- * @param  string $format   Tipo de fichero. Véase la constante `FICHEROS`
- * @param  string $filename Ruta del fichero
- * @return array            Estructura de datos con los registros del fichero decodificados
+ * @param  string $format   	Tipo de fichero. Véase la constante `FICHEROS`
+ * @param  string $filename 	Ruta del fichero
+ * @param  string $raw      	Devolve o dato em bruto (desde parseLine)
+ * @param  string $only			KV array de resultados para só gardar estes e alixeirar peso em memoria destes:
+ * 									se só buscamos galiza, só gardamos nos resultados os seus valores, p.e.: ['Comunidad autónoma' => 'Galicia'];
+ * @return array            	Estructura de datos con los registros del fichero decodificados
  */
-function parseFile($format, $filename) {
+function parseFile($format, $filename, $raw=false, $only=[]) {
 	$results = [];
 	$lines = file($filename);
 	foreach ($lines as $line) {
-		$results[] = parseLine($format, $line);
+		$results[] = parseLine($format, $line, $raw, $only);
 	}
 
+	// eliminamos os valores baleiros, porque se pasamos algo em $only pode que engada arrays baleiros, e reindexamos
+	$results = array_values(array_filter($results));
 	return $results;
 }
 
@@ -180,4 +194,28 @@ function prettifyMunicipality($name) {
 	$name = implode('/', $names);
 
 	return $name;
+}
+
+
+
+/**
+ * Devolve key identificando mesa
+ * 
+ * @param [array] 		$r		Data parseada
+ * @return [string]		$key	CP_DE_CONCELHO|DISTRITO-SECCION-MESA
+ */
+function createKeyIdentifyBoard($r) {
+	// construimos a key para que seja única e identifique á mesa univocamente
+	$cp = (isset($r['Provincia_raw']) ? $r['Provincia_raw'] : '');
+
+	if(isset($r['CERA']) && $r['CERA'] == 'Sí') {
+		$cp .= $r['CERA_raw'];
+		$dist_sec_mesa = 'CERA'.$r['Número de distrito']."-".$r['Código de mesa'];
+	}
+	else {
+		$cp .= $r['Municipio_raw'];
+		$dist_sec_mesa = $r['Número de distrito_raw']."-".trim($r['Código de sección'])."-".$r['Código de mesa'];
+	}
+
+	return "$cp|$dist_sec_mesa";
 }
