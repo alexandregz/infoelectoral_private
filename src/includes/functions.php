@@ -219,3 +219,22 @@ function createKeyIdentifyBoard($r) {
 
 	return "$cp|$dist_sec_mesa";
 }
+
+
+
+/**
+ * Devolve key identificando concello
+ * 
+ * @param [array] 		$r		Data parseada
+ * @return [string]		$key	CP_DE_CONCELHO
+ */
+function createKeyIdentifyCouncil($r) {
+	// construimos a key para que seja única e identifique á mesa univocamente
+	$cp = (isset($r['Provincia_raw']) ? $r['Provincia_raw'] : '') . $r['Municipio_raw'];
+
+	if(isset($r['CERA']) && $r['CERA'] == 'Sí') {
+		$cp .= $r['CERA_raw'] . $r['Municipio_raw'];
+	}
+
+	return $cp;
+}
