@@ -347,14 +347,14 @@ $formats = [
 		'Siglas' => [
 			'start' => 15,
 			'length' => 50,
-			'formatter' => fn($code) => trim(utf8_encode($code)),
+			'formatter' => fn($code) => trim(mb_convert_encoding($code, 'UTF-8')),
 		],
 
 		// Denominación de la candidatura
 		'Candidatura' => [
 			'start' => 65,
 			'length' => 150,
-			'formatter' => fn($code) => trim(utf8_encode($code)),
+			'formatter' => fn($code) => trim(mb_convert_encoding($code, 'UTF-8')),
 		],
 
 		// Código de la candidatura cabecera de acumulación a nivel provincial
@@ -635,7 +635,7 @@ $formats = [
 			'length' => 100,
 			'formatter' => function($code, $line) {
 				$distrito = substr($line, 16, 2);
-				return $distrito === '99' ? trim(utf8_encode($code)) : null;
+				return $distrito === '99' ? trim(mb_convert_encoding($code, 'UTF-8')) : null;
 			},
 		],
 		'Nombre del distrito' => [
