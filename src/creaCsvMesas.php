@@ -74,6 +74,19 @@
  *              [Provincial] => 000045
  *              [Autonómica] => 000045
  *              [Nacional] => 000006
+ * 
+ * @ToDo pasar candidaturas em numerico (Nacional), ver comentario em 200: 	// so das siglas recibidas. Se som numericas, miramos contra 'Candidatura nacional'
+ * 
+ * 
+ * alex@vosjod:/Volumes/Seagate Expansion 1/BNG Ames mapas/infoelectoral_private(main)$ php src/creaCsvMesas.php -f files/europeas/07201905_MESA/10071905.DAT -c galiza  --concello 'Santiago de Compostela' -s=datos_europeas_2019-07_SantiagoCompostela.csv
+ *	Buscando resultados Parlamento Europeo (5/2019) de [] en [Galicia] (Concello: Santiago de Compostela) ...
+ *	processando ficheiro de candidaturas (03071905.DAT)...
+ * 	processando ficheiro de resultados por mesas (10071905.DAT)...
+ *		Totais mesas: 3904
+ *	processando ficheiro de resultados totais (09071905.DAT)...
+ *		Totais resultados: 122
+ *  alex@vosjod:/Volumes/Seagate Expansion 1/BNG Ames mapas/infoelectoral_private(main)$
+ * 
  */
 
 
