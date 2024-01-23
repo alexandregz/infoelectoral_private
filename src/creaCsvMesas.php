@@ -41,7 +41,7 @@
  * - Podemos enviar partido como ID, para os casos nos que o nome tem acentos ou caracteres "raros": 
  * 
  * Recibe:
- * 	- path ao 10*.DAT cos resultados das mesas electorais (vai buscar no mesmo pathos ficheiros co mesmo nome 03* e 09* para cruzar datos de candidaturas e resultados totais)
+ * 	- path ao 10*.DAT cos resultados das mesas electorais (vai buscar no mesmo path os ficheiros co mesmo nome 03* e 09* para cruzar datos de candidaturas e resultados totais)
  *  - ID da CA (11 para Galiza, ver FICHEROS.doc)
  *  - partido politico (por exemplo, BNG) para devolver resultados so dese partido
  * 
