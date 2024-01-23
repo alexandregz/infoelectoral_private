@@ -1,5 +1,17 @@
 <?php
 /**
+ * Exemplo ultimas eleicçons Congreso (NOTA: emprego o PHP de MAMP direitamente):
+ * 
+ * alex@vosjod:/Volumes/Seagate Expansion 1/BNG Ames mapas/infoelectoral_private(main)$ /Applications/MAMP/bin/php/php8.0.8/bin/php src/creaCsvMesas.php --ficheiro files/congreso/02202307_MESA/10022307.DAT -c Galiza > '/Users/alex/Desktop/Ames politica/BNG_Ames/MAPAS_tereborace/mapas_toda_a_comarca_2022-07-03/bngcomarca/datos/congreso/202307_concelhos_congreso.csv'
+ * Buscando resultados Congreso (7/2023) de [] en [Galicia] ...
+ * processando ficheiro de candidaturas (03022307.DAT)...
+ * processando ficheiro de resultados por mesas (10022307.DAT)...
+ * 	Totais mesas: 35815
+ * processando ficheiro de resultados totais (09022307.DAT)...
+ * 	Totais resultados: 3966
+ * alex@vosjod:/Volumes/Seagate Expansion 1/BNG Ames mapas/infoelectoral_private(main)$
+ * 
+ * 
  * HELP:
  * alex@vosjod:/Volumes/Seagate Expansion 1/BNG Ames mapas/infoelectoral(master)$ php src/creaCsvMesas.php --help
  * Uso: php src/creaCsvMesas.php
