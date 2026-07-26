@@ -5,8 +5,8 @@
  * 
  * HELP:
  * alex@vosjod:/Volumes/Seagate Expansion 1/BNG Ames mapas/infoelectoral(master)$ php src/creaCsvConcellos.php --help
- * Uso: php src/creaCsvMesas.php
- * 		-f/--ficheiro PATH/FICHEIRO_10*.DAT
+ * Uso: php src/creaCsvConcellos.php
+ * 		-f/--ficheiro PATH_MUNI/FICHEIRO_0604*.DAT
  * 		-c/--comunidade COMUNIDADE
  * 		-p/--partido SIGLAS_PARTIDO|ID_CANDIDATURA_NACIONAL
  * 		[-s/--saida FICHEIRO_SAIDA_CSV]
@@ -14,6 +14,20 @@
  * 		[-h/--help]
  * 
  * A docu é a mesma que creaCsvMesas.php, ver nese ficheiro.
+ * 
+ * 
+ * 
+ * Exemplo:
+ * 
+ * alex@vosjod:/Volumes/Seagate Expansion 1/BNG Ames mapas/infoelectoral_private(main)$ php src/creaC
+svConcellos.php --ficheiro files/municipales/04202305_MUNI/06042305.DAT -c Galiza > '/Users/alex/Desktop/Ames politica/BNG_Ames/MAPAS_tereborace/mapas_toda_a_comarca_2022-07-03/bngcomarca/datos/municipais/2023-05.csv'
+Buscando resultados Municipales (5/2023) de [] en [Galicia] ...
+processando ficheiro de candidaturas (03042305.DAT)...
+processando ficheiro de resultados por Concelhos (06042305.DAT)...
+	Totais mesas: 20554
+processando ficheiro de resultados totais (05042305.DAT)...
+	Totais resultados: 312
+ * 
  */
 
 
@@ -71,7 +85,7 @@ $CONCELLO = isset($options['concello']) ? $options['concello']: null;
 
 if(isset($options['h']) || isset($options['help']) || !isset($FICHEIRO)) {
 	exit("Uso: php {$argv[0]} 
-		-f/--ficheiro PATH/FICHEIRO_06*.DAT 
+		-f/--ficheiro PATH_MUNI/FICHEIRO_0604*.DAT 
 		-c/--comunidade COMUNIDADE
 		-p/--partido SIGLAS_PARTIDO|ID_CANDIDATURA_NACIONAL
 		[--concello CONCELLO(case sensitive)]

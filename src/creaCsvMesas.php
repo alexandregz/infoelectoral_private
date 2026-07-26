@@ -23,6 +23,17 @@
  * 		[-h/--help]
  * 
  * 
+ * Exemplo municipais 2023 maio:
+ * alex@vosjod:/Volumes/Seagate Expansion 1/BNG Ames mapas/infoelectoral_private(main)$ /Applications/MAMP/bin/php/php8.0.8/bin/php src/creaCsvMesas.php --ficheiro files/municipales/04202305_MESA/10042305.DAT -c Galiza > '/Users/alex/Desktop/Ames politica/BNG_Ames/MAPAS_tereborace/mapas_toda_a_comarca_2022-07-03/bngcomarca/datos/municipais/202305_municipais.csv'
+   Buscando resultados Municipales (5/2023) de [] en [Galicia] ...
+   processando ficheiro de candidaturas (03042305.DAT)...
+   processando ficheiro de resultados por mesas (10042305.DAT)...
+	    Totais mesas: 21564
+   processando ficheiro de resultados totais (09042305.DAT)...
+	    Totais resultados: 3686
+ * 
+ * 
+ * 
  * GARDAR DATOS DIREITAMENTE EM .csv:
  * alex@vosjod:/Volumes/Seagate Expansion 1/BNG Ames mapas/infoelectoral(master)$ php src/creaCsvMesas.php --ficheiro files/congreso/02201911_MESA/10021911.DAT -p BNG -c Galiza --saida=datos.csv
  * Buscando resultados Congreso (11/2019) de [BNG] en [Galicia] ...
@@ -388,8 +399,8 @@ if($SAIDA) {
 }
 
 // para as cabeceiras ao ser multidimensional colho o primeiro dos values (que som outro array cos datos por mesa)
-fputcsv($output, array_keys(array_values($resultados_por_mesas)[0]), ";");
+fputcsv($output, array_keys(array_values($resultados_por_mesas)[0]), ";", '"', "\\");
 foreach ($resultados_por_mesas as $r) {
-	fputcsv($output, $r, ";");
+	fputcsv($output, $r, ";", '"', "\\");
 }
 fclose($output);

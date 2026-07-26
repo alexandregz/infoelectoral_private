@@ -1,0 +1,73 @@
+COMO ENGADIR RESULTADOS POR MESAS
+
+
+1) baixar de infoelectoral / Descargas / xxxx_MESA.zip
+
+
+2) mover ficheiros a path deste repo, p.e.
+
+alex@vosjod:/Volumes/Seagate Expansion/BNG Ames mapas/infoelectoral_private (main)$ ls
+CODE_OF_CONDUCT.md CONTRIBUTING.md    FUNDING.yml        HOWTO.md           LICENSE            README.md          assets             files              src
+alex@vosjod:/Volumes/Seagate Expansion/BNG Ames mapas/infoelectoral_private (main)$ ls -ltra files/europeas/
+total 0
+drwxr-xr-x  12 alex  wheel  408 Jan  2  2023 07198706_MESA
+drwxr-xr-x   8 alex  wheel  272 Jan  2  2023 07198706_TOTA
+drwxr-xr-x  10 alex  wheel  340 Jan  2  2023 07198706_MUNI
+drwxr-xr-x  12 alex  wheel  408 Jan  2  2023 07198906_MESA
+drwxr-xr-x  12 alex  wheel  408 Jan  2  2023 07199406_MESA
+drwxr-xr-x   8 alex  wheel  272 Jan  2  2023 07198906_TOTA
+drwxr-xr-x  10 alex  wheel  340 Jan  2  2023 07198906_MUNI
+drwxr-xr-x   8 alex  wheel  272 Jan  2  2023 07199406_TOTA
+drwxr-xr-x  10 alex  wheel  340 Jan  2  2023 07199406_MUNI
+drwxr-xr-x  12 alex  wheel  408 Jan  2  2023 07199906_MESA
+drwxr-xr-x   8 alex  wheel  272 Jan  2  2023 07199906_TOTA
+drwxr-xr-x  10 alex  wheel  340 Jan  2  2023 07199906_MUNI
+drwxr-xr-x  12 alex  wheel  408 Jan  2  2023 07200406_MESA
+drwxr-xr-x  12 alex  wheel  408 Jan  2  2023 07200906_MESA
+drwxr-xr-x   8 alex  wheel  272 Jan  2  2023 07200406_TOTA
+drwxr-xr-x  10 alex  wheel  340 Jan  2  2023 07200406_MUNI
+drwxr-xr-x   8 alex  wheel  272 Jan  2  2023 07200906_TOTA
+drwxr-xr-x  10 alex  wheel  340 Jan  2  2023 07200906_MUNI
+drwxr-xr-x  12 alex  wheel  408 Jan  2  2023 07201405_MESA
+drwxr-xr-x   8 alex  wheel  272 Jan  2  2023 07201405_TOTA
+drwxr-xr-x  10 alex  wheel  340 Jan  2  2023 07201405_MUNI
+drwxr-xr-x  12 alex  wheel  408 Jan  2  2023 07201905_MESA
+drwxr-xr-x   8 alex  wheel  272 Jan  2  2023 07201905_TOTA
+drwxr-xr-x  10 alex  wheel  340 Jan  2  2023 07201905_MUNI
+drwxr-xr-x  11 alex  wheel  374 Jan 23  2024 ..
+drwx------@ 12 alex  staff  408 Jul 26 16:24 07202406_MUNI
+drwx------@ 10 alex  staff  340 Jul 26 22:02 07202406_TOTA
+drwxr-xr-x  29 alex  wheel  986 Jul 26 22:03 .
+drwx------@ 15 alex  staff  510 Jul 26 23:12 07202406_MESA
+
+
+3) executar src/creaCsvMesas.php co parametro "ficheiro" o 10xxxxx e -c "Galiza":
+
+
+3.1) dá erro se non hai un src/includes/municipios/YYYY.php, copiase de 2023 para 2024, por exemplo:
+
+
+alex@vosjod:/Volumes/Seagate Expansion/BNG Ames mapas/infoelectoral_private (main)$ php src/creaCsvMesas.php --ficheiro files/europeas/07202406_MESA/10072406.DAT -c Galiza > '/Users/alex/Desktop/Ames politica/BNG_Ames/MAPAS_tereborace/mapas_toda_a_comarca_2022-07-03/bngcomarca/datos/europeas/europeas_2024.csv'
+Buscando resultados Parlamento Europeo (6/2024) de [] en [Galicia] ...
+PHP Warning:  require(includes/municipios/2024.php): Failed to open stream: No such file or directory in /Volumes/Seagate Expansion/BNG Ames mapas/infoelectoral_private/src/creaCsvMesas.php on line 230
+PHP Fatal error:  Uncaught Error: Failed opening required 'includes/municipios/2024.php' (include_path='.:/opt/homebrew/Cellar/php/8.5.4/share/php/pear') in /Volumes/Seagate Expansion/BNG Ames mapas/infoelectoral_private/src/creaCsvMesas.php:230
+Stack trace:
+#0 {main}
+  thrown in /Volumes/Seagate Expansion/BNG Ames mapas/infoelectoral_private/src/creaCsvMesas.php on line 230
+
+alex@vosjod:/Volumes/Seagate Expansion/BNG Ames mapas/infoelectoral_private (main)$ cp src/includes/municipios/2023.php src/includes/municipios/2024.php
+
+
+4) executar 
+
+alex@vosjod:/Volumes/Seagate Expansion/BNG Ames mapas/infoelectoral_private (main)$ php src/creaCsvMesas.php --ficheiro files/europeas/07202406_MESA/10072406.DAT -c Galiza > '/Users/alex/Desktop/Ames politica/BNG_Ames/MAPAS_tereborace/mapas_toda_a_comarca_2022-07-03/bngcomarca/datos/europeas/europeas_2024.csv'
+Buscando resultados Parlamento Europeo (6/2024) de [] en [Galicia] ...
+processando ficheiro de candidaturas (03072406.DAT)...
+processando ficheiro de resultados por mesas (10072406.DAT)...
+	Totais mesas: 133552
+processando ficheiro de resultados totais (09072406.DAT)...
+	Totais resultados: 3928
+alex@vosjod:/Volumes/Seagate Expansion/BNG Ames mapas/infoelectoral_private (main)$
+
+
+
