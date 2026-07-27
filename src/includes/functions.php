@@ -121,6 +121,8 @@ function parseFile($format, $filename, $raw=false, $only=[]) {
 	$results = [];
 	$lines = file($filename);
 	foreach ($lines as $line) {
+		// $linha = parseLine($format, $line, $raw, $only);
+		// echo "linha: ".var_export($linha, true)."\n";
 		$results[] = parseLine($format, $line, $raw, $only);
 	}
 

@@ -19,8 +19,7 @@
  * 
  * Exemplo:
  * 
- * alex@vosjod:/Volumes/Seagate Expansion 1/BNG Ames mapas/infoelectoral_private(main)$ php src/creaC
-svConcellos.php --ficheiro files/municipales/04202305_MUNI/06042305.DAT -c Galiza > '/Users/alex/Desktop/Ames politica/BNG_Ames/MAPAS_tereborace/mapas_toda_a_comarca_2022-07-03/bngcomarca/datos/municipais/2023-05.csv'
+ * alex@vosjod:/Volumes/Seagate Expansion 1/BNG Ames mapas/infoelectoral_private(main)$ php src/creaCsvConcellos.php --ficheiro files/municipales/04202305_MUNI/06042305.DAT -c Galiza > '/Users/alex/Desktop/Ames politica/BNG_Ames/MAPAS_tereborace/mapas_toda_a_comarca_2022-07-03/bngcomarca/datos/municipais/2023-05.csv'
 Buscando resultados Municipales (5/2023) de [] en [Galicia] ...
 processando ficheiro de candidaturas (03042305.DAT)...
 processando ficheiro de resultados por Concelhos (06042305.DAT)...
@@ -339,8 +338,8 @@ if($SAIDA) {
 }
 
 // para as cabeceiras ao ser multidimensional colho o primeiro dos values (que som outro array cos datos por mesa)
-fputcsv($output, array_keys(array_values($resultados_por_mesas)[0]), ";");
+fputcsv($output, array_keys(array_values($resultados_por_mesas)[0]), ";", '"', "\\");
 foreach ($resultados_por_mesas as $r) {
-	fputcsv($output, $r, ";");
+	fputcsv($output, $r, ";", '"', "\\");
 }
 fclose($output);
